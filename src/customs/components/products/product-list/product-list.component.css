@@ -1,0 +1,13 @@
+.example-card {
+    max-width: 400px;
+  }
+  
+  .example-header-image {
+    background-size: cover;
+  }
+  mat-grid-tile {
+    background: lightblue;
+  }
+ div  :hover{
+    background-color : rgba(107, 214, 107, 0.748);
+  }

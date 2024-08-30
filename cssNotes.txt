@@ -1,0 +1,11 @@
+Meta tag - help in SE0)
+<meta name ='description' , content = " this will display in search page">
+<meta name ='keywords' , content = " this ,will, display, in ,search ,page">
+<meta name ='robots' , content = " NOINDEX , NOFOLLOW"> bot will not index this page
+
+inline elements - <span>
+block element (display in next line)- <p>
+Pixel is a static measurement, while percent and EM are relative measurements. 
+The size of an EM or percent depends on its parent. If the text size of body is 16 pixels, then 150% or 1.5 EM will be 24 pixels (1.5 * 16).
+
+Font property - font-family,font-size,line-height,font-weight,font-style

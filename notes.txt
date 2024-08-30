@@ -1,0 +1,110 @@
+to install angular cli and create new project
+bunx --bun @angular/cli@17 new angular_frontend1
+
+bunx --bun @angular/cli@version new project_name --no-standalone
+
+--no-standalone treat app-component as non main file so it could be import 
+
+to start and run the project
+bun run start or 
+bunx ng serve 
+1. bun run start
+Explanation:
+
+This command uses bun to run the script defined in the "start" field of your package.json file.
+The "start" script is defined as "ng serve", so running bun run start will execute the ng serve command, which starts the Angular development server.
+How It Works:
+
+bun run is similar to npm run or yarn run. It looks in the package.json file for a script named start and executes it.
+Since "start": "ng serve" is defined in package.json, bun run start triggers ng serve, which launches the Angular app.
+2. bunx ng serve
+Explanation:
+
+The bunx command is analogous to npx in Node.js. 
+It runs executables from node_modules/.bin without needing to specify the full path.
+ng is the Angular CLI command, and serve is the specific command that starts the development server.
+
+Standalone components are a new type of Angular component that does not need to be declared in a NgModule.
+
+These are components that can be used directly in the template of another component without being part
+of an NgModule, or imported in an NgModule.
+Your application developed with NgModules is probably relatively monolithic,
+even though NgModules are supposed to help you modularize your application
+
+https://blog.angular-university.io/angular-standalone-components/
+
+types of component > selector
+@component({
+    selector : 'html-tag' // selector as element
+    selector : [html-attribute] // selector as attribute
+    selector : '.html-class' // selector as class
+})
+
+use -
+<html>
+<html-tag> </html-tag>
+<div html-attribute> </div>
+<div class='html-class'> </div>
+</html>
+
+add bootstrap setting in angular.json > style > 
+ "node_modules/bootstrap/dist/css/bootstrap.min.css",
+
+data binding - {{value}}  //value come from component eg. <p> hello {{name}}</p> name declare in component class
+property binding - [name] = 'value' //see  data passing parent to child component below
+event binding - (name) = 'function()'
+interpolation - {{this.status}}
+$event - (event-name) = 'function($event)' //send input to component
+example -
+in component
+updateName(event : KeyboardEvent){
+    this.name (<HTMLInputElement> event.target).value
+    //or 
+    this.name (event.target as HTMLInputElement).value
+}
+in html
+<input (keyup) ="updateName($event)/>
+
+two way data binding - [(ngModel)] = "value" // automatically update value in component and frontend 
+it should import from angular form
+
+if else in angular html - 
+<div *ngif ="True; else ids "> True </div>
+<ng-template #ids> <p> else condition </p>
+</ng-template>
+
+[ngStyle] ="{'background-color':'red'}" //inline style in html
+[ngClass] = "{'property': condition}" //"{'disabled':disabledFlag==true}"
+
+data passing parent to child component
+
+data(item) in parent component -> using child tag in parent html ** <child *ngFor="let item of items" [listItem] = "item"> </child> **
+-> passing data [listItem] using property binding -> declare property in child component ** @Input () listItem: any; **
+-> use data in child html using data binding ** <li>{{listItem}}</li> **
+
+data passing child to parent component
+call function on any event <li (click) ="itemClicked(listItem)">{{listItem}}</li> , listItem should be input property in child component
+-> initialize event which emit the value  @Output() itemVal = new EventEmitter<string>(); 
+-> send value using any function, itemClicked(listItem:string){ this.itemVal.emit(listItem);}
+-> <app-dynamic-list (itemVal) = "itemClicked1($event)" > call child event (itemVal) in parent html 
+and send emitted/output value to function  using $event 
+-> receive value in parent component , itemClicked1(itemVal:string){
+    console.log('child to parent',itemVal);
+  };
+
+  https://v17.angular.io/guide/inputs-outputs 
+
+  <ng-content> - add dynamic prefix
+  <input #username> - #username is local reference could pass to any function
+  @ViewChild('username) userName: any  - ViewChild get the value from html element
+  console.log(this.userName.nativeElement.value) - to get the value
+
+  add script file in main html header using angular.json
+   "scripts": [
+              "./node_modules/jquery/dist/jquery.js",
+              "./node_modules/bootstrap/dist/js/bootstrap.js",
+              "./node_modules/htmx.org/dist/htmx.min.js"
+            ],
+
+ https://htmx.org/docs/
+ https://medium.com/@bhargavr445/routing-in-angular-stand-alone-apps-2682b4de756e 

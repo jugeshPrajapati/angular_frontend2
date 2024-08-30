@@ -1,0 +1,57 @@
+<!-- <img >
+<p>Name : {{product.name}}</p>
+<p>Price : {{product.price}}</p>
+<p>Color : {{product.color}}</p>
+<p>Discounted Price : {{getDiscountedPrice().toFixed(2)}}</p>
+<p>{{product.inStock > 0 ? "only "+product.inStock+" left" : "Out of Stock"}}</p><br>
+
+<button [disabled]="!(product.inStock>0)"> Buy Now</button>
+<button (click)="decreamentCartValue()"> - </button>
+<span>{{ addToCart }}</span>
+<button (click)="increamentCartValue()"> + </button> -->
+<!-- <input placeholder=1> -->
+
+<!-- <div class="row row-cols-1 row-cols-md-4 g-1" >
+    <div *ngFor="let item of product"> 
+<div class="col">
+ 
+<div class="card" style="width: 18rem;"  >
+    <img [src] ="item.pImage" class="card-img-top" alt="...">
+    <div class="card-body">
+    <h5 class="card-title">{{item.name}}</h5>
+    <p>Name : {{product.name}}</p>
+     <p>Price : {{item.price}}<br>
+    Color : {{item.color}}<br>
+    Discounted Price : {{getDiscountedPrice(item).toFixed(2)}}<br>
+    {{item.inStock > 0 ? "only "+item.inStock+" left" : "Out of Stock"}}</p><br>
+    <button [disabled]="!(item.inStock>0)"> Buy Now</button>
+    <button (click)="decreamentCartValue()"> - </button>
+    <span>{{ addToCart }}</span>
+    <button (click)="increamentCartValue(item)"> + </button>
+    </div>
+  </div>
+</div>  </div>
+</div> --> 
+
+
+<mat-grid-list cols="5" rowHeight="1:2">
+  <div *ngFor="let item of product"> 
+    <mat-grid-tile >
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-card-title>{{item.name}}</mat-card-title>
+    <mat-card-subtitle>$ {{getDiscountedPrice(item).toFixed(2)}}</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image [src]="item.pImage" alt="Photo of a Shiba Inu">
+  <mat-card-content>
+    <p >
+      Color : {{item.color}}<br>
+      Original Price : $ {{item.price}}<br>
+      {{item.inStock > 0 ? "only "+item.inStock+" left" : "Out of Stock"}}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button [disabled]="!(item.inStock>0)" >Buy Now</button>
+    <button mat-button>Share</button>
+  </mat-card-actions>
+</mat-card></mat-grid-tile>
+</div></mat-grid-list>

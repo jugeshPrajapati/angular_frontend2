@@ -3,9 +3,104 @@ Meta tag - help in SE0)
 <meta name ='keywords' , content = " this ,will, display, in ,search ,page">
 <meta name ='robots' , content = " NOINDEX , NOFOLLOW"> bot will not index this page
 
-inline elements - <span>
-block element (display in next line)- <p>
-Pixel is a static measurement, while percent and EM are relative measurements. 
-The size of an EM or percent depends on its parent. If the text size of body is 16 pixels, then 150% or 1.5 EM will be 24 pixels (1.5 * 16).
+You cannot have more than one element with the same id in an HTML document
+You can only have one ID per element, but you can indeed have more than one class.
 
-Font property - font-family,font-size,line-height,font-weight,font-style
+inline elements - <span>
+block element (display in next line)- <p> , you set width of these element
+Pixel is a static measurement, while percent and EM are relative measurements. 
+The size of an EM or percent depends on its parent. If the text size of body is 16 pixels, 
+then 150% or 1.5 EM will be 24 pixels (1.5 * 16).
+The size of an REM or percent depends on its root element like HTML tag.
+VW - view width , VH- view height
+Font property - font-family,font-size,line-height,font-weight,font-style , text-align , align-center ,align-item , justify-content
+
+float- align position it could overflow parent block
+clear - it prevent overlapping float element 
+
+list-style - style list bullet point use with list
+
+overflow - prevent overlapping 
+
+display - help to convert element into inline,block, inline-block,none(remove element),
+            flex(flex-direction: row(default), column, row-reverse, column-reverse;
+                flex-wrap : wrap ,wrap-reverse;
+                flex-flow : flex-direction flex-wrap;
+                flex-content: center , space-evenly , space-between ,space-around;
+                align-item : center,flex-end,flex-start, stretch;
+                flex-grow : number (child property);
+                flex-shrink : number (child property);
+                flex-basis: pixels (child property, when flex-direction set to row it set width, 
+                when flex-direction set to col it set height );
+                flex: flex-grow , flex-shrink , flex-basis;
+                align-self : flex-start, flex-end,center ) ,
+            grid(grid-template-coulumns : px , auto , fr , repeat(number ,auto or auto-fit,minmax(px,px));               
+                 grid-template-row : px, auto , fr(this is page ratio);
+                 grid-auto-rows : px, auto ,fr;
+                  grid-gap : px ,rem;
+                  grid-column-gap : px;
+                  grid-row-gap: px;
+                  grid-template-area:" area-name"
+                  "area-name";
+                  child property---
+                  grid-area : name;
+                  grid-column-start : number;
+                  grid-column-end : number;
+                  grid-row-start : number;
+                  grid-row-end : number;
+                  grid-column : 1/span 3;
+                  grid-row : 1/span 3)
+
+visibility - none (invisible element)
+
+margin:auto - center the block element
+
+position - static(default) , absolute (relative to parent position) , 
+            relative (relative to element original position) , 
+            fixed (fix position on page, does not change even scroll page) , 
+            sticky (fix on top when scroll )
+
+sub property : left , right ,top, bottom , z-index these use with position
+
+div>p {} - css apply if p is immediate child of div eg- <div> <p> </p> </div>
+div p {} - apply css on all child p of div , eg <div> <li> <p> </p> </li> </div>
+div + p {} - apply css if div is sibling of p , eg - <div> </div> <p> </p>
+
+element[attribute ="value"] - apply css on element which have this property ,eg- input[type='text]
+li:nth-child(n) -apply css on nth child element or add (2n+0) to apply on each second element , 
+or add odd, even
+
+--declare-variable : value 
+property : var(--declare-variable)  // use variable
+:root{
+    --declare-global-variable : value 
+}
+
+animation---
+.class{
+    animation-name : name,
+    animation-duration: 10s,
+    animation-iteration-count: number,
+    animation-fill-mode : forwards  // last animation state remain
+    animation-timing-function: ease-in(it start slowly),
+    animation-delay : second,
+    animation-direction: reverse (reverse the animation)
+    animation : (shorthand of all above property)
+}
+@keyframes name{
+    from{ width : px}
+    to {width :px} 
+    0%{} 
+    25%{animation at 25% }  
+    100%{}
+}
+
+transition ---
+transition-property : background-color (use this name or use  'all' to transition all property)
+transition-duration : 5s
+transition-timing-function: ease-in / ease-out
+transition-delay: 5s
+transition : transition-property transition-duration transition-timing-function transition-delay
+
+transform ---
+transform : rotate(deg) , skew (40 deg) , scale(5) , translateX(px ) ,translateY(px), translate(px, px)

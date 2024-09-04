@@ -108,3 +108,50 @@ and send emitted/output value to function  using $event
 
  https://htmx.org/docs/
  https://medium.com/@bhargavr445/routing-in-angular-stand-alone-apps-2682b4de756e 
+
+false , '',null,undefined, 0  assume as false
+
+viewchild monitor element in same component
+// viewchild first argument, read : use it to read token from the queried from element 
+  // static: it determine when the query is resolved , false when resolved on change
+  // @ViewChild(componentName) variable : componentName; or we can use this
+  @ViewChild('templateInputRef',{static:true}) searchChildElement !: ElementRef;
+viewchild only return first element value
+
+@ViewChildren return list of  multiple element of same name
+@ViewChildren('componentName/#templateReference') variable : QueryList <ElementRef>;
+iterate the list to get value
+variable.forEach((element)=>{
+    console.log(element.nativeElement.value)
+})
+it determine only when the query is resolved when detect change
+
+@ContentChild is same as viewchild but it monitor element in child component
+
+<ng-template #templateReference> content </ng-template>
+<ng-container *ngTemplateOutlet= " templateReference" > </ng-container>
+ng-container does not render itself in DOM like div block , and only show its content
+best use with other structural directive instead of event
+
+<ng-content> is a way to pass content from child to parent
+https://danywalls.com/how-to-get-and-use-ng-template-ng-container-and-ng-content
+
+ngOnChanges hook called whenever any @input property get change
+import {OnChanges,OnInit} from '@angular/core';
+class ClassName implements OnChanges, OnInit{
+    ngOnChanges(){};
+    ngOnInit(){};
+}
+
+ngOnInit hook raises after it create the component and update its input properties.
+this hook is raised after ngOnChanges
+
+
+
+
+
+
+
+
+
+

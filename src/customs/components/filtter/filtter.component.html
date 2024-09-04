@@ -1,0 +1,8 @@
+<!-- aria-label provides an accessible name when no visible label exists in the DOM -->
+ <!-- assigning name in mat-radio-group will select default radio  -->
+<mat-radio-group aria-label="Select filter" [(ngModel)] ='defaultSelect'> 
+    <mat-radio-button value="all" (change)="radioChange($event)">{{'all ( '+all+' )'}}</mat-radio-button>
+    <mat-radio-button value="true" (change)="radioChange($event)">{{'inStock ( '+inStock+' )'}}</mat-radio-button>
+    <mat-radio-button value="false" (change)="radioChange($event)">{{'outOfStock ( '+outOfStock+' )'}}</mat-radio-button>
+  </mat-radio-group>
+  

@@ -4,7 +4,7 @@ import {ProductListComponent} from '../../components/products/product-list/produ
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [ProductListComponent,
+  imports: [ProductListComponent
   
   ],
   templateUrl: './home.component.html',

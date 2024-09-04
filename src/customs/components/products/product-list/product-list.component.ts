@@ -1,20 +1,22 @@
-import { Component} from '@angular/core';
-import { Product } from './product-types';
+import { Component,ContentChild} from '@angular/core';
+import { Product } from '../product-types';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import {MatButtonModule} from '@angular/material/button';
-import {MatCardModule} from '@angular/material/card';
+import {ProductComponent} from '../product/product.component';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {FiltterComponent} from '../../filtter/filtter.component'
+import {SearchbarComponent} from '../../searchbar/searchbar.component'
 @Component({
   selector: 'product-list',
   standalone: true,
-  imports: [FormsModule,CommonModule,MatCardModule, MatButtonModule,MatGridListModule],
+  imports: [FormsModule,CommonModule,ProductComponent,MatGridListModule,FiltterComponent,SearchbarComponent],
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.css'
 })
 export class ProductListComponent {
   addToCart:number = 0
- product : Product[] = [{
+  @ContentChild(SearchbarComponent) searchText !: SearchbarComponent;
+ products : Product[] = [{
   pImage:"../../../../favicon.ico",
   name:"angular",
   price:999,
@@ -27,7 +29,7 @@ export class ProductListComponent {
   price:9939,
   color: "pink",
   discount:2,
-  inStock: 120
+  inStock: 0
 },{
   pImage:"../../../../favicon.ico",
   name:"angular2",
@@ -36,9 +38,7 @@ export class ProductListComponent {
   discount:9,
   inStock: 40
 }]
-getDiscountedPrice(item:Product){
-  return item.price - item.discount
-}
+
 decreamentCartValue(){
   if (this.addToCart > 0) {
     this.addToCart --
@@ -49,6 +49,18 @@ increamentCartValue(item:Product){
   if(item.inStock > this.addToCart){
     this.addToCart++
   }
+
+}
+totalProduct  = this.products.length;
+totalProductInStock = this.products.filter(p => p.inStock > 0).length;
+totalProductOutOfStock = this.products.filter(p => p.inStock === 0).length;
+selectedFilter:string="all";
+
+
+onFilterChange(event:any){
+this.selectedFilter = event ;
+console.log("in parent",this.selectedFilter )
+console.log("in parent",this.searchText )
 
 }
 }

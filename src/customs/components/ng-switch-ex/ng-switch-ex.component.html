@@ -1,0 +1,12 @@
+<mat-chip-set aria-label="content selection">
+  <mat-chip (click)="tab = 'oneFish'">One fish</mat-chip>
+  <mat-chip (click)="tab = 'twoFish'">Two fish</mat-chip>
+  <mat-chip (click)="tab = 'threeFish'">Three fish</mat-chip>
+  <mat-chip disabled>Four fish</mat-chip>
+</mat-chip-set>
+
+<div class="container" [ngSwitch]="tab">
+  <h1 *ngSwitchDefault>One Fish</h1>
+  <h1 *ngSwitchCase="'twoFish'">Two Fish</h1>
+  <h1 *ngSwitchCase="'threeFish'">Three Fish</h1>
+</div>

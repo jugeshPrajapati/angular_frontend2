@@ -1,4 +1,6 @@
 to install angular cli and create new project
+nvm list
+>nvm use 18.16.0
 bunx --bun @angular/cli@17 new angular_frontend1
 
 bunx --bun @angular/cli@version new project_name --no-standalone
@@ -74,8 +76,8 @@ if else in angular html -
 </ng-template>
 
 [ngStyle] ="{'background-color':'red'}" //inline style in html
-[ngClass] = "{'property': condition}" //"{'disabled':disabledFlag==true}"
-
+[ngClass] = "{'property/css': condition}" //"{'disabled':disabledFlag==true}"
+if css file contain '-' u need to use '' ,eg =  'custom-background'
 data passing parent to child component
 
 data(item) in parent component -> using child tag in parent html ** <child *ngFor="let item of items" [listItem] = "item"> </child> **
@@ -147,11 +149,105 @@ ngOnInit hook raises after it create the component and update its input properti
 this hook is raised after ngOnChanges
 
 
+ngDoCheck invokes during every change detection cycle this hook invoked even there is no change in input bound property
+eg. click button which does not do anything but still change detection cycle will run ngDoCheck
+
+ngAfterContentInit update property decorated with @ContentChild before this hook raised
 
 
+In Angular, both `inject()` and `@Inject` are used for dependency injection, but they serve different purposes and are used in different contexts:
 
+### 1. `inject()`
+- **Function-based DI (Introduced in Angular 14):** `inject()` is used within functions or factory methods where the dependency is injected imperatively. It's ideal for scenarios where decorators cannot be applied, such as within functions or services.
+- **Usage Context:** `inject()` is typically used in service constructors, in custom hooks, or in standalone functions that need to manually retrieve dependencies.
+- **Example Usage:**
+  ```typescript
+  import { inject } from '@angular/core';
+  import { MyService } from './my-service';
 
+  function myCustomFunction() {
+      const service = inject(MyService);
+      // Use the injected service
+  }
+  ```
 
+- **Use Case:** `inject()` is more flexible for dynamic dependency injection and can be useful in more functional programming styles or when working outside of classes.
 
+### 2. `@Inject`
+- **Decorator-based DI:** `@Inject` is used to explicitly inject a dependency where type information alone is not sufficient. It is used in constructor parameters to indicate that a specific token should be injected.
+- **Usage Context:** This is commonly used when injecting tokens that are either primitive values (like strings or numbers) or non-class-based tokens (e.g., InjectionTokens).
+- **Example Usage:**
+  ```typescript
+  import { Inject, Injectable } from '@angular/core';
+  import { SOME_TOKEN } from './tokens';
 
+  @Injectable({
+    providedIn: 'root',
+  })
+  export class MyService {
+    constructor(@Inject(SOME_TOKEN) private tokenValue: string) {
+      // tokenValue will be injected
+    }
+  }
+  ```
 
+- **Use Case:** `@Inject` is required when the dependency being injected cannot be inferred from the parameter's type (e.g., when using InjectionToken or primitive types).
+
+### Key Differences:
+1. **Context of Use:**
+   - `@Inject`: Used in **constructor parameters**.
+   - `inject()`: Used inside **functions**, **factories**, or any place where decorators can't be applied.
+   
+2. **Explicit vs. Implicit:**
+   - `@Inject`: More explicit and is required for tokens that can't be inferred (like InjectionTokens).
+   - `inject()`: More implicit, used to fetch dependencies directly inside a function.
+
+3. **Angular Version:**
+   - `@Inject` has been available since earlier Angular versions.
+   - `inject()` is relatively new (introduced in Angular 14).
+
+Both serve to inject dependencies, but the key difference lies in their usage patterns.
+()=>{
+
+} arrow function point to outer scope so it can use this keyword out side of its parent function
+
+ RxJS methods - Of() & From(). Both of these operators are used to create an observable.
+Of operators automatically emit complete signal;
+from operators only take single iterable argument
+
+routerLink= "/about" , it is absolute path it append path behind the root path 
+routerLink = "about" or "./about" or "../about" for one lvl back , it is relative path it append path currently active route
+
+Query string are the optional parameter in url
+ex = /about?search=value&time=today
+fragment or section on package
+ex = /home#images
+child routes
+{path:'courses',component: ComponentName},
+{path:'courses',children: [
+  {path:'/:id', component: ChildComponent}
+  {path:'list/:id', component: ChildComponent2}
+]}
+
+arrow function-
+()=> expression // by default return value
+()=>{return expression} //with curly braces have to add return
+Because arrow functions use curly brackets, {} you cannot implicitly return an object
+
+import { DOCUMENT } from '@angular/common';
+
+{{value | async}} this pipe wait for data before render
+
+in ngForm buttons are by default submit type .
+
+this.form.form.pathValue({
+  fieldName  : value 
+})
+
+rajankumarsingh@cdac.in
+123abc
+rajankumar@cdac.in
+
+nvm-----
+nvm ls
+nvm use 20.5.1

@@ -1,0 +1,58 @@
+<form #registrationForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
+  <!-- Username ngModel add form control property in ngForm element -->
+  <div>
+    <label for="username">Username</label>
+    <input
+      type="text"
+      id="username"
+      name="username"
+      [(ngModel)]="user.username"
+      required
+      #username="ngModel"
+    />
+    <div *ngIf="username.invalid && username.touched">
+      Username is required.
+    </div>
+  </div>
+
+  <!-- Email -->
+  <div>
+    <label for="email">Email</label>
+    <input
+      type="email"
+      id="email"
+      name="email"
+      [(ngModel)]="user.email"
+      required
+      email
+      #email="ngModel"
+    />
+    <div *ngIf="email.invalid && email.touched">
+      <div *ngIf="email?.errors?.['required']">Email is required.</div>
+      <div *ngIf="email?.errors?.['email']">Invalid email address.</div>
+    </div>
+  </div>
+
+  <!-- Password -->
+  <div>
+    <label for="password">Password</label>
+    <input
+      type="password"
+      id="password"
+      name="password"
+      [(ngModel)]="user.password"
+      required
+      minlength="6"
+      #password="ngModel"
+    />
+    <div *ngIf="password.invalid && password.touched">
+      <div *ngIf="password.errors?.['required']">Password is required.</div>
+      <div *ngIf="password.errors?.['minlength']">
+        Password must be at least 6 characters long.
+      </div>
+    </div>
+  </div>
+
+  <!-- Submit Button -->
+  <button type="submit" [disabled]="registrationForm.invalid">Register</button>
+</form>

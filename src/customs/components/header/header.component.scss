@@ -1,3 +1,15 @@
 .example-spacer {
-    flex: 1 1 auto;
-  }
+  flex: 1 1 auto;
+}
+.app-title {
+  margin: 1px;
+}
+.active {
+  font-weight: bold;
+}
+.login {
+  color: greenyellow;
+}
+.logout {
+  color: black;
+}

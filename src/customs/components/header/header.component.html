@@ -1,20 +1,61 @@
-<mat-toolbar  color ="primary">
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-      <mat-icon>menu</mat-icon>
-    </button>
-    <span>My App</span>
-    <span class="example-spacer"></span>
-    <div > <app-searchbar> </app-searchbar></div>
-    
-    <span class="example-spacer"></span>
-    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-      <mat-icon>favorite</mat-icon>
-    </button>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-      <mat-icon>share</mat-icon>
-    </button>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-        <mat-icon>person</mat-icon>
-      </button>
-  </mat-toolbar>
-  
+<mat-toolbar color="primary">
+  <button
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example icon-button with menu icon"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span class="app-title">My App</span>
+  <!-- <a mat-button href="">Home</a>  
+  it will reload the page and download to source in browser
+  while routerLinks work as SPA ,import RouterLinks in component, 
+  target="_blank" open link in new tab
+  -->
+  <a mat-button routerLink="home" routerLinkActive="active">Home</a>
+  <a
+    mat-button
+    (click)="navigateAbout()"
+    routerLinkActive="active"
+    target="_blank"
+    >About</a
+  >
+  <a mat-button routerLink="/child-parent-relation" routerLinkActive="active"
+    >P-C</a
+  >
+  <a mat-button routerLink="/form" routerLinkActive="active">Form</a>
+  <!-- routerLinkActive="active" routerLink="child-parent-relation" -->
+  <span class="example-spacer"></span>
+
+  <div><app-searchbar> </app-searchbar></div>
+
+  <span class="example-spacer"></span>
+  <button
+    mat-icon-button
+    class="example-icon favorite-icon"
+    (click)="subscribedButton()"
+    aria-label="Example icon-button with heart icon"
+  >
+    <mat-icon>subscriptions</mat-icon>
+  </button>
+  <button
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example icon-button with share icon"
+    routerLink="home"
+    fragment="footer"
+  >
+    <mat-icon>share</mat-icon>
+  </button>
+  <button
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example icon-button with share icon"
+    routerLink="login"
+    matTooltip="login"
+    [ngClass]="{ login: islogged }"
+  >
+    <mat-icon>person</mat-icon>
+  </button>
+  <button routerLink="login" [queryParams]="{ logout: true }">logout</button>
+</mat-toolbar>

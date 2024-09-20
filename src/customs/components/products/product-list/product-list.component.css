@@ -1,21 +1,16 @@
-
-  
-  .example-header-image {
-    background-size: cover;
-    
-  }
-  mat-grid-tile {
-    /* background: lightblue; */
-    padding: auto;
-  
-  }
-  mat-grid-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill,minmax(250px,1fr));
-  }
-app-product{
+.example-header-image {
+  background-size: cover;
+}
+mat-grid-tile {
+  /* background: lightblue; */
+  padding: auto;
+}
+mat-grid-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
+app-product {
   flex-grow: 1;
   margin-left: 10px;
   margin-right: 10px;
-  
 }

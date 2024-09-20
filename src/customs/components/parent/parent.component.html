@@ -1,0 +1,12 @@
+<h1>child-parent-relation</h1>
+<ng-container>
+  <input type="text" #inputRef (focus)="(0)" />
+  <button (click)="onBtnClicked(inputRef)">Submit</button>
+  <app-child [message]="inputVal" *ngIf="!toDestroy">
+    <p #temp>this is project content: {{ inputVal }}</p> </app-child
+  ><br />
+  <button mat-raised-button (click)="DestroyComponent()" setBackground>
+    Show/Hide
+  </button>
+  <app-rxjs-example></app-rxjs-example>
+</ng-container>

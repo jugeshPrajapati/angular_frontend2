@@ -1,0 +1,11 @@
+<!-- app.component.html -->
+<div class="signature-container">
+  <signature-pad
+    [options]="signaturePadOptions"
+    (onBeginEvent)="drawStart()"
+    (onEndEvent)="drawComplete()"
+  ></signature-pad>
+</div>
+
+<button (click)="clearSignature()">Clear</button>
+<button (click)="saveSignature()">Save</button>

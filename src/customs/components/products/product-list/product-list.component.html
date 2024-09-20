@@ -31,8 +31,7 @@
     </div>
   </div>
 </div>  </div>
-</div> --> 
-
+</div> -->
 
 <!-- <mat-grid-list cols="5" rowHeight="1:2">
   <div *ngFor="let item of product"> 
@@ -55,16 +54,18 @@
   </mat-card-actions>
 </mat-card></mat-grid-tile>
 </div></mat-grid-list> -->
-<div>Search Text : {{searchText}}</div>
-Filtter : <app-filtter 
-[all]="totalProduct" 
-[inStock]="totalProductInStock" 
-[outOfStock]="totalProductOutOfStock"
-(selectedFilter) ="onFilterChange($event)"
+<div>Search Text : {{ searchText }}</div>
+Filtter :
+<app-filtter
+  [all]="totalProduct"
+  [inStock]="totalProductInStock"
+  [outOfStock]="totalProductOutOfStock"
+  (selectedFilter)="onFilterChange($event)"
 ></app-filtter>
 <mat-grid-list cols="4" rowHeight="1:2">
-  <ng-container *ngFor="let item of products"> 
-    <mat-grid-tile *ngIf="selectedFilter==='all' || (item.inStock>0).toString() === selectedFilter" >
+  <ng-container *ngFor="let item of products | mypipe : selectedFilter">
+    <!-- <mat-grid-tile *ngIf="selectedFilter==='all' || (item.inStock>0).toString() === selectedFilter" > -->
+    <mat-grid-tile>
       <app-product [items]="item"> </app-product>
-</mat-grid-tile>
-</ng-container></mat-grid-list>
+    </mat-grid-tile> </ng-container
+></mat-grid-list>

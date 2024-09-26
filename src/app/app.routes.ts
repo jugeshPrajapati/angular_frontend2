@@ -9,6 +9,7 @@ import { AuthGaurdService } from '../customs/services/auth-gaurd.service';
 import { ProductDetailComponent } from '../customs/components/products/productDetail/product-detail/product-detail.component';
 import { RegistrationComponent } from '../customs/components/registration/registration.component';
 import { ReactiveFormComponent } from '../customs/components/reactive-form/reactive-form.component';
+import { TaskDashboardComponent } from '../customs/components/dashboard/task-dashboard/task-dashboard.component';
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
@@ -18,5 +19,6 @@ export const routes: Routes = [
   { path: 'product/:name', component: ProductDetailComponent },
   { path: 'child-parent-relation', component: ParentComponent },
   { path: 'form', component: ReactiveFormComponent },
+  { path: 'dashboard', component: TaskDashboardComponent },
   { path: '**', component: NotFoundComponent },
 ];

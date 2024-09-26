@@ -30,6 +30,7 @@ export class ChildComponent
     AfterContentChecked
 {
   @Input() message!: string;
+  //viewchild monitor element in same component
   @ViewChild('temp') tempPara!: ElementRef;
   @ContentChild('temp') paraContent!: ElementRef;
   constructor() {

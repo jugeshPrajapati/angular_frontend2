@@ -158,8 +158,10 @@ ngAfterContentInit update property decorated with @ContentChild before this hook
 In Angular, both `inject()` and `@Inject` are used for dependency injection, but they serve different purposes and are used in different contexts:
 
 ### 1. `inject()`
-- **Function-based DI (Introduced in Angular 14):** `inject()` is used within functions or factory methods where the dependency is injected imperatively. It's ideal for scenarios where decorators cannot be applied, such as within functions or services.
-- **Usage Context:** `inject()` is typically used in service constructors, in custom hooks, or in standalone functions that need to manually retrieve dependencies.
+- **Function-based DI (Introduced in Angular 14):** `inject()` is used within functions or factory methods where the dependency is injected imperatively.
+ It's ideal for scenarios where decorators cannot be applied, such as within functions or services.
+- **Usage Context:** `inject()` is typically used in service constructors, in custom hooks, or in standalone functions that need 
+to manually retrieve dependencies.
 - **Example Usage:**
   ```typescript
   import { inject } from '@angular/core';
@@ -171,11 +173,14 @@ In Angular, both `inject()` and `@Inject` are used for dependency injection, but
   }
   ```
 
-- **Use Case:** `inject()` is more flexible for dynamic dependency injection and can be useful in more functional programming styles or when working outside of classes.
+- **Use Case:** `inject()` is more flexible for dynamic dependency injection and can be useful in more functional programming styles 
+or when working outside of classes.
 
 ### 2. `@Inject`
-- **Decorator-based DI:** `@Inject` is used to explicitly inject a dependency where type information alone is not sufficient. It is used in constructor parameters to indicate that a specific token should be injected.
-- **Usage Context:** This is commonly used when injecting tokens that are either primitive values (like strings or numbers) or non-class-based tokens (e.g., InjectionTokens).
+- **Decorator-based DI:** `@Inject` is used to explicitly inject a dependency where type information alone is not sufficient. 
+It is used in constructor parameters to indicate that a specific token should be injected.
+- **Usage Context:** This is commonly used when injecting tokens that are either primitive values (like strings or numbers) or 
+non-class-based tokens (e.g., InjectionTokens).
 - **Example Usage:**
   ```typescript
   import { Inject, Injectable } from '@angular/core';
@@ -191,7 +196,8 @@ In Angular, both `inject()` and `@Inject` are used for dependency injection, but
   }
   ```
 
-- **Use Case:** `@Inject` is required when the dependency being injected cannot be inferred from the parameter's type (e.g., when using InjectionToken or primitive types).
+- **Use Case:** `@Inject` is required when the dependency being injected cannot be inferred from the parameter's type 
+(e.g., when using InjectionToken or primitive types).
 
 ### Key Differences:
 1. **Context of Use:**
@@ -207,9 +213,12 @@ In Angular, both `inject()` and `@Inject` are used for dependency injection, but
    - `inject()` is relatively new (introduced in Angular 14).
 
 Both serve to inject dependencies, but the key difference lies in their usage patterns.
+
+
 ()=>{
 
-} arrow function point to outer scope so it can use this keyword out side of its parent function
+} arrow function point to outer scope so it can use 'this' keyword out side of its parent function
+
 
  RxJS methods - Of() & From(). Both of these operators are used to create an observable.
 Of operators automatically emit complete signal;
@@ -251,3 +260,25 @@ rajankumar@cdac.in
 nvm-----
 nvm ls
 nvm use 20.5.1
+
+interceptor:
+ provideHttpClient(
+      withInterceptors([authInterceptor, loggingInterceptor]),
+      withFetch()
+    ),
+config interceptor in app.config 
+
+export const authInterceptor: HttpInterceptorFn = (req, next) => {
+
+  const modifiedReq = req.clone({
+    headers: req.headers.append('auth', 'abcxyz'),
+  });
+  return next(modifiedReq).pipe(
+    tap((event) => {
+      if (event.type === HttpEventType.Response) {
+        console.log('Response has arrived. Response data: ');
+        console.log(event.body);
+      }
+    })
+  );
+};

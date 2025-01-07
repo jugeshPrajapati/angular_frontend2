@@ -6,8 +6,10 @@ import { SearchbarComponent } from '../searchbar/searchbar.component';
 import { OnsubscribeService } from '../../services/onsubscribe.service';
 import { RouterLink, RouterLinkActive, Router } from '@angular/router';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { AuthService } from '../../services/auth.service';
+import { Auth2Service } from '../../services/auth2.service';
 import { CommonModule } from '@angular/common';
+import { User } from '../../types/user2';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -27,19 +29,25 @@ import { CommonModule } from '@angular/common';
 })
 export class HeaderComponent {
   router: Router = inject(Router);
-  // authService: AuthService = inject(AuthService);
+  auth2Service: Auth2Service = inject(Auth2Service);
   islogged!: boolean;
+  private userSubject!: Subscription;
 
-  constructor(
-    private subscribed: OnsubscribeService,
-    private authService: AuthService
-  ) {
-    this.authService.loggedIn.subscribe((isLoggedIn) => {
-      this.islogged = isLoggedIn;
+  constructor(private subscribed: OnsubscribeService) {}
+  ngOnInit() {
+    this.userSubject = this.auth2Service.user.subscribe((user: User | null) => {
+      console.log(user);
+      this.islogged = user ? true : false;
     });
-    console.log(this.islogged);
   }
 
+  onLogout() {
+    this.auth2Service.logout();
+  }
+
+  ngOnDestroy() {
+    this.userSubject.unsubscribe();
+  }
   subscribedButton() {
     this.subscribed.OnSubscribeClicked('jugesh');
   }

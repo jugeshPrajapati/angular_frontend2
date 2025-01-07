@@ -1,17 +1,29 @@
-import { HttpInterceptorFn, HttpEventType } from '@angular/common/http';
-import { tap } from 'rxjs/operators';
+import { Injectable, inject } from '@angular/core';
+import {
+  HttpInterceptor,
+  HttpRequest,
+  HttpHandler,
+  HttpParams,
+  HttpInterceptorFn,
+} from '@angular/common/http';
+import { exhaustMap, take, tap } from 'rxjs/operators';
+import { Auth2Service } from './auth2.service';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
-  console.log('Auth Interceptor called!');
-  const modifiedReq = req.clone({
-    headers: req.headers.append('auth', 'abcxyz'),
-  });
-  return next(modifiedReq).pipe(
-    tap((event) => {
-      if (event.type === HttpEventType.Response) {
-        console.log('Response has arrived. Response data: ');
-        console.log(event.body);
+  const authService = inject(Auth2Service);
+  return authService.user.pipe(
+    take(1),
+    exhaustMap((user) => {
+      if (!user) {
+        return next(req);
       }
+      const modifiedReq = req.clone({
+        params: user.token
+          ? new HttpParams().set('auth', user.token)
+          : req.params,
+      });
+
+      return next(modifiedReq);
     })
   );
 };

@@ -48,7 +48,7 @@
   >
     <mat-icon>share</mat-icon>
   </button>
-  <button
+  <!-- <button
     mat-icon-button
     class="example-icon"
     aria-label="Example icon-button with share icon"
@@ -58,5 +58,7 @@
   >
     <mat-icon>person</mat-icon>
   </button>
-  <button routerLink="login" [queryParams]="{ logout: true }">logout</button>
+  <button routerLink="login" [queryParams]="{ logout: true }">logout</button> -->
+  <a routerLink="login" *ngIf="!islogged">LOGIN</a>
+  <a *ngIf="islogged" (click)="onLogout()">LOGOUT</a>
 </mat-toolbar>

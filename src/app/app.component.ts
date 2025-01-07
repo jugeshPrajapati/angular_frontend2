@@ -13,6 +13,7 @@ import {
 } from '@angular/router';
 import { HeaderComponent } from '../customs/components/header/header.component';
 import { OnsubscribeService } from '../customs/services/onsubscribe.service';
+import { Auth2Service } from '../customs/services/auth2.service';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -33,7 +34,11 @@ export class AppComponent {
   title = 'angular_frontend2';
   router: Router = inject(Router);
   showLoader: boolean = false;
+
+  authService: Auth2Service = inject(Auth2Service);
+
   ngOnInit() {
+    this.authService.autoLogin();
     this.router.events.subscribe((RouterEvent: Event) => {
       if (RouterEvent instanceof NavigationStart) {
         this.showLoader = true;
